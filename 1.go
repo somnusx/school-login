@@ -37,17 +37,24 @@ func pan() {
 
 
 func main() {
-	s := "KETX15132"
-	pw := "OTcwNTAx"
-
-//	var i int = 0
-	time1 := 0.9
-	time2 := 1
+	//s := "KETX15132"
+	//pw := "OTcwNTAx"
+	s := "71441P20"
+	pw := "NzE0NDEy"
+	time1 := 0.5
+	time2 := 0.6
 	for i := 1; i < 82; i++ {
 	if i == 80{
 	fmt.Println("\u767b\u5f55\u5931\u8d25\u3002\u3002\u3002")
 	time.Sleep(1200 * time.Second)
 	os.Exit(1)	
+	}
+	if i == 40{
+	time1 = time1 + 0.4
+	time2 = time2 + 0.4
+	fmt.Println("\u5207\u6362\u65f6\u95f4")
+	fmt.Println("time=0.9")
+	fmt.Println("time=1")
 	}
 	fmt.Printf("\u7b2c%d\u6b21\u5c1d\u8bd5......\n",i)
 	data := make(url.Values)
