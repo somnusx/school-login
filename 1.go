@@ -7,8 +7,34 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"regexp"
 	"encoding/json"
 )
+
+
+
+func pan() {
+
+		response,err3:=http.Get("http://www.baidu.com")
+		if err3 != nil {
+			return
+		}
+		defer response.Body.Close()
+
+		body,err4:=ioutil.ReadAll(response.Body)
+		if err4 != nil {
+			return
+		}
+		
+		reg := regexp.MustCompile(`baidu`)
+		if reg.FindAllString(string(body), -1)[0]=="baidu"{
+			fmt.Println("\u767b\u5f55\u6210\u529f")
+			time.Sleep(1200 * time.Second)
+			os.Exit(1)
+		}
+}
+
+
 
 func main() {
 	s := "KETX15132"
@@ -17,9 +43,10 @@ func main() {
 //	var i int = 0
 	time1 := 0.9
 	time2 := 1
-	for i := 0; i < 81; i++ {
+	for i := 1; i < 82; i++ {
 	if i == 80{
 	fmt.Println("\u767b\u5f55\u5931\u8d25\u3002\u3002\u3002")
+	time.Sleep(1200 * time.Second)
 	os.Exit(1)	
 	}
 	fmt.Printf("\u7b2c%d\u6b21\u5c1d\u8bd5......\n",i)
@@ -42,13 +69,12 @@ func main() {
 	json.Unmarshal(body, &user)  
 	if (user["info"] == "\u8ba4\u8bc1\u5931\u8d25\u002c\u0020\u5e76\u53d1\u767b\u5f55\u8d85\u8fc7\u6700\u5927\u9650\u5236") || (user["info"] == "\u8ba4\u8bc1\u5931\u8d25\u002c\u0020\u8bf7\u68c0\u67e5\u5bc6\u7801\u53ca\u8d26\u6237\u72b6\u6001"){
 	fmt.Println("Local account is not available")
+	time.Sleep(1200 * time.Second)
 	os.Exit(1)	
 	}
 
 	if user["info"] == "\u8bbe\u5907\u672a\u54cd\u5e94"{
-		fmt.Println("\u767b\u5f55\u6210\u529f")
-		break
-		os.Exit(1)
+			pan()
 	}
 	
 	time.Sleep(time.Duration(time1) * time.Second)
@@ -72,7 +98,6 @@ func logout() {
 	body, _ := ioutil.ReadAll(res.Body)  
 	json.Unmarshal(body, &use)  
 	if use["info"] == "\u8bbe\u5907\u672a\u54cd\u5e94"{
-		fmt.Println("\u767b\u5f55\u6210\u529f")
-		os.Exit(1)
-	}
+		pan()
+}
 }
